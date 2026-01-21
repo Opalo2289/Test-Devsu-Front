@@ -1,0 +1,33 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.header {
+  @include flex-center;
+  height: 80px;
+  background-color: $color-bg-card;
+  border-bottom: 1px solid $color-border;
+  
+  &__logo {
+    @include flex-center;
+    gap: $spacing-sm;
+    text-decoration: none;
+    color: $color-text-primary;
+    transition: opacity $transition-fast;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  
+  &__icon {
+    width: 32px;
+    height: 32px;
+    color: $color-text-primary;
+  }
+  
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.5px;
+  }
+}

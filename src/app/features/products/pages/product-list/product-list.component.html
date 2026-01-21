@@ -1,0 +1,154 @@
+<div class="product-list">
+  <div class="product-list__container">
+    <!-- Toolbar -->
+    <div class="product-list__toolbar">
+      <div class="search-box">
+        <input
+          type="text"
+          class="search-box__input"
+          placeholder="Search..."
+          [value]="searchTerm()"
+          (input)="onSearchChange($event)"
+        />
+      </div>
+      <a routerLink="/productos/nuevo" class="btn-add">
+        Agregar
+      </a>
+    </div>
+
+    <!-- Error message -->
+    @if (error()) {
+      <div class="error-message">
+        <span>{{ error() }}</span>
+        <button type="button" class="error-message__retry" (click)="loadProducts()">
+          Reintentar
+        </button>
+      </div>
+    }
+
+    <!-- Table -->
+    <div class="table-container">
+      @if (isLoading()) {
+        <app-skeleton-loader [rows]="5" [columns]="6"></app-skeleton-loader>
+      } @else {
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th class="product-table__th">Logo</th>
+              <th class="product-table__th">Nombre del producto</th>
+              <th class="product-table__th">
+                Descripción
+                <span class="tooltip" title="Descripción del producto financiero">ⓘ</span>
+              </th>
+              <th class="product-table__th">
+                Fecha de liberación
+                <span class="tooltip" title="Fecha de lanzamiento del producto">ⓘ</span>
+              </th>
+              <th class="product-table__th">
+                Fecha de reestructuración
+                <span class="tooltip" title="Fecha de revisión del producto">ⓘ</span>
+              </th>
+              <th class="product-table__th product-table__th--actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of paginatedProducts(); track trackByProductId($index, product)) {
+              <tr class="product-table__row">
+                <td class="product-table__td">
+                  <div class="product-logo">
+                    @if (product.logo) {
+                      <img 
+                        [src]="product.logo" 
+                        [alt]="product.name"
+                        class="product-logo__img"
+                        (error)="onImageError($event)"
+                      />
+                    } @else {
+                      <div class="product-logo__placeholder">
+                        {{ product.name.charAt(0).toUpperCase() }}
+                      </div>
+                    }
+                  </div>
+                </td>
+                <td class="product-table__td">{{ product.name }}</td>
+                <td class="product-table__td product-table__td--description">
+                  {{ product.description }}
+                </td>
+                <td class="product-table__td">{{ formatDate(product.date_release) }}</td>
+                <td class="product-table__td">{{ formatDate(product.date_revision) }}</td>
+                <td class="product-table__td product-table__td--actions">
+                  <div class="dropdown">
+                    <button 
+                      type="button" 
+                      class="dropdown__trigger"
+                      (click)="toggleMenu(product.id)"
+                      [attr.aria-expanded]="openMenuId() === product.id"
+                      aria-haspopup="true"
+                    >
+                      <span class="dropdown__dots">⋮</span>
+                    </button>
+                    @if (openMenuId() === product.id) {
+                      <div class="dropdown__menu" role="menu">
+                        <button 
+                          type="button" 
+                          class="dropdown__item"
+                          (click)="editProduct(product)"
+                          role="menuitem"
+                        >
+                          Editar
+                        </button>
+                        <button 
+                          type="button" 
+                          class="dropdown__item dropdown__item--danger"
+                          (click)="confirmDelete(product)"
+                          role="menuitem"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    }
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="product-table__empty">
+                  No se encontraron productos
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+
+    <!-- Footer -->
+    @if (!isLoading()) {
+      <div class="product-list__footer">
+        <span class="results-count">{{ totalResults() }} Resultados</span>
+        <div class="page-size-selector">
+          <select 
+            class="page-size-selector__select"
+            [value]="pageSize()"
+            (change)="onPageSizeChange($event)"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Delete confirmation modal -->
+<app-confirm-modal
+  [isOpen]="showDeleteModal()"
+  [message]="'¿Estás seguro de eliminar el producto ' + (productToDelete()?.name || '') + '?'"
+  confirmText="Confirmar"
+  cancelText="Cancelar"
+  [isLoading]="isDeleting()"
+  (confirm)="deleteProduct()"
+  (cancel)="cancelDelete()"
+></app-confirm-modal>

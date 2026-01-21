@@ -1,0 +1,22 @@
+<div class="skeleton-table">
+  <div class="skeleton-row skeleton-row--header">
+    @for (col of columnsArray; track $index) {
+      <div class="skeleton-cell">
+        <div class="skeleton-box skeleton-box--header"></div>
+      </div>
+    }
+  </div>
+  @for (row of rowsArray; track $index) {
+    <div class="skeleton-row">
+      @for (col of columnsArray; track $index) {
+        <div class="skeleton-cell">
+          @if ($index === 0) {
+            <div class="skeleton-box skeleton-box--avatar"></div>
+          } @else {
+            <div class="skeleton-box"></div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

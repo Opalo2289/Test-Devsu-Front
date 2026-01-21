@@ -1,0 +1,6 @@
+@use '../styles/variables' as *;
+
+.main-content {
+  min-height: calc(100vh - 80px);
+  padding: $spacing-xl $spacing-md;
+}

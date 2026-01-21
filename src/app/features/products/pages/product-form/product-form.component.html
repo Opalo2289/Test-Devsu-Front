@@ -1,0 +1,133 @@
+<div class="product-form-page">
+  <div class="product-form-container">
+    <h1 class="product-form-container__title">
+      Formulario de {{ isEditMode() ? 'Edición' : 'Registro' }}
+    </h1>
+
+    @if (error()) {
+      <div class="error-banner">
+        {{ error() }}
+      </div>
+    }
+
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <span>Cargando producto...</span>
+      </div>
+    } @else {
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+        <div class="product-form__grid">
+          <!-- ID -->
+          <div class="form-group">
+            <label for="id" class="form-group__label">ID</label>
+            <input
+              type="text"
+              id="id"
+              formControlName="id"
+              class="form-group__input"
+              [class.form-group__input--error]="isFieldInvalid('id')"
+            />
+            @if (isFieldInvalid('id')) {
+              <span class="form-group__error">{{ getFieldError('id') }}</span>
+            }
+          </div>
+
+          <!-- Nombre -->
+          <div class="form-group">
+            <label for="name" class="form-group__label">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-group__input"
+              [class.form-group__input--error]="isFieldInvalid('name')"
+            />
+            @if (isFieldInvalid('name')) {
+              <span class="form-group__error">{{ getFieldError('name') }}</span>
+            }
+          </div>
+
+          <!-- Descripción -->
+          <div class="form-group">
+            <label for="description" class="form-group__label">Descripción</label>
+            <input
+              type="text"
+              id="description"
+              formControlName="description"
+              class="form-group__input"
+              [class.form-group__input--error]="isFieldInvalid('description')"
+            />
+            @if (isFieldInvalid('description')) {
+              <span class="form-group__error">{{ getFieldError('description') }}</span>
+            }
+          </div>
+
+          <!-- Logo -->
+          <div class="form-group">
+            <label for="logo" class="form-group__label">Logo</label>
+            <input
+              type="text"
+              id="logo"
+              formControlName="logo"
+              class="form-group__input"
+              placeholder="URL del logo"
+              [class.form-group__input--error]="isFieldInvalid('logo')"
+            />
+            @if (isFieldInvalid('logo')) {
+              <span class="form-group__error">{{ getFieldError('logo') }}</span>
+            }
+          </div>
+
+          <!-- Fecha Liberación -->
+          <div class="form-group">
+            <label for="date_release" class="form-group__label">Fecha Liberación</label>
+            <input
+              type="date"
+              id="date_release"
+              formControlName="date_release"
+              class="form-group__input"
+              [class.form-group__input--error]="isFieldInvalid('date_release')"
+            />
+            @if (isFieldInvalid('date_release')) {
+              <span class="form-group__error">{{ getFieldError('date_release') }}</span>
+            }
+          </div>
+
+          <!-- Fecha Revisión (readonly, auto-calculada) -->
+          <div class="form-group">
+            <label for="date_revision" class="form-group__label">Fecha Revisión</label>
+            <input
+              type="date"
+              id="date_revision"
+              formControlName="date_revision"
+              class="form-group__input form-group__input--disabled"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="product-form__actions">
+          <button
+            type="button"
+            class="btn btn--secondary"
+            (click)="onReset()"
+            [disabled]="isSubmitting()"
+          >
+            Reiniciar
+          </button>
+          <button
+            type="submit"
+            class="btn btn--primary"
+            [disabled]="isSubmitting() || productForm.invalid"
+          >
+            @if (isSubmitting()) {
+              <span class="btn__spinner"></span>
+            }
+            {{ isEditMode() ? 'Actualizar' : 'Enviar' }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>

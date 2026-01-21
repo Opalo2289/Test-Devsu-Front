@@ -1,0 +1,40 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.skeleton-table {
+  width: 100%;
+}
+
+.skeleton-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr 1fr;
+  gap: $spacing-md;
+  padding: $spacing-md 0;
+  border-bottom: 1px solid $color-border;
+  
+  &--header {
+    padding-bottom: $spacing-lg;
+  }
+}
+
+.skeleton-cell {
+  @include flex-start;
+}
+
+.skeleton-box {
+  @include skeleton-animation;
+  height: 20px;
+  width: 80%;
+  border-radius: $border-radius-sm;
+  
+  &--header {
+    height: 16px;
+    width: 100px;
+  }
+  
+  &--avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-full;
+  }
+}

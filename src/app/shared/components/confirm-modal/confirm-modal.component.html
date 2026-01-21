@@ -1,0 +1,28 @@
+@if (isOpen) {
+  <div class="modal-overlay" (click)="onOverlayClick($event)" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal__content">
+        <p class="modal__message">{{ message }}</p>
+      </div>
+      <div class="modal__actions">
+        <button 
+          type="button" 
+          class="modal__btn modal__btn--cancel" 
+          (click)="onCancel()"
+          [disabled]="isLoading">
+          {{ cancelText }}
+        </button>
+        <button 
+          type="button" 
+          class="modal__btn modal__btn--confirm" 
+          (click)="onConfirm()"
+          [disabled]="isLoading">
+          @if (isLoading) {
+            <span class="modal__spinner"></span>
+          }
+          {{ confirmText }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

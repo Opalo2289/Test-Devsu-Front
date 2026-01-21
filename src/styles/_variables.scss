@@ -1,0 +1,94 @@
+// ==============================================
+// VARIABLES - Design System Banco
+// ==============================================
+
+// Colores primarios
+$color-primary: #FFDC00;
+$color-primary-hover: #E6C600;
+$color-primary-dark: #C9A800;
+
+// Colores de texto
+$color-text-primary: #1A1A2E;
+$color-text-secondary: #4A4A5A;
+$color-text-muted: #8A8A9A;
+$color-text-light: #FFFFFF;
+
+// Colores de fondo
+$color-bg-main: #F5F5F5;
+$color-bg-card: #FFFFFF;
+$color-bg-hover: #F0F0F0;
+
+// Colores de estado
+$color-error: #D32F2F;
+$color-error-light: #FFEBEE;
+$color-success: #2E7D32;
+$color-success-light: #E8F5E9;
+$color-warning: #F57C00;
+$color-info: #1976D2;
+
+// Bordes
+$color-border: #E0E0E0;
+$color-border-hover: #BDBDBD;
+$color-border-focus: #1A1A2E;
+$color-border-error: #D32F2F;
+
+// Sombras
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+// Tipografía
+$font-family-base: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Espaciado
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+
+// Bordes
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-full: 50%;
+$border-width: 1px;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Z-index
+$z-index-dropdown: 100;
+$z-index-modal-backdrop: 200;
+$z-index-modal: 300;
+$z-index-tooltip: 400;
+
+// Transiciones
+$transition-fast: 150ms ease-in-out;
+$transition-normal: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// Anchos máximos
+$container-max-width: 1200px;
+$form-max-width: 600px;

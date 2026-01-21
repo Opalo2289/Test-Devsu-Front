@@ -1,0 +1,240 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/mixins' as *;
+
+.product-list {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  
+  &__container {
+    @include card;
+    padding: $spacing-xl;
+  }
+  
+  &__toolbar {
+    @include flex-between;
+    margin-bottom: $spacing-xl;
+    gap: $spacing-md;
+    
+    @include mobile {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  
+  &__footer {
+    @include flex-between;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $color-border;
+  }
+}
+
+// Search box
+.search-box {
+  flex: 0 0 auto;
+  
+  &__input {
+    @include input-base;
+    width: 200px;
+    
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+
+// Add button
+.btn-add {
+  @include button-primary;
+  text-decoration: none;
+  padding: $spacing-sm $spacing-xl;
+}
+
+// Error message
+.error-message {
+  @include flex-between;
+  background-color: $color-error-light;
+  color: $color-error;
+  padding: $spacing-md;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-lg;
+  
+  &__retry {
+    @include button-secondary;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+  }
+}
+
+// Table
+.table-container {
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  &__th {
+    text-align: left;
+    padding: $spacing-md;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    border-bottom: 2px solid $color-border;
+    white-space: nowrap;
+    
+    &--actions {
+      width: 50px;
+    }
+  }
+  
+  &__row {
+    &:hover {
+      background-color: $color-bg-hover;
+    }
+  }
+  
+  &__td {
+    padding: $spacing-md;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    border-bottom: 1px solid $color-border;
+    vertical-align: middle;
+    
+    &--description {
+      max-width: 200px;
+      @include text-truncate;
+    }
+    
+    &--actions {
+      text-align: center;
+      position: relative;
+    }
+  }
+  
+  &__empty {
+    text-align: center;
+    padding: $spacing-2xl;
+    color: $color-text-muted;
+  }
+}
+
+// Tooltip
+.tooltip {
+  display: inline-block;
+  margin-left: $spacing-xs;
+  color: $color-text-muted;
+  cursor: help;
+  font-size: $font-size-xs;
+}
+
+// Product logo
+.product-logo {
+  width: 40px;
+  height: 40px;
+  
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: $border-radius-sm;
+  }
+  
+  &__placeholder {
+    @include flex-center;
+    width: 100%;
+    height: 100%;
+    background-color: $color-bg-main;
+    border-radius: $border-radius-full;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    font-size: $font-size-base;
+  }
+}
+
+// Dropdown menu
+.dropdown {
+  position: relative;
+  
+  &__trigger {
+    @include flex-center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+    
+    &:hover {
+      background-color: $color-bg-hover;
+    }
+  }
+  
+  &__dots {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+    font-weight: $font-weight-bold;
+  }
+  
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 120px;
+    background-color: $color-bg-card;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    box-shadow: $shadow-md;
+    z-index: $z-index-dropdown;
+    animation: fadeIn 0.15s ease-out;
+  }
+  
+  &__item {
+    display: block;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    text-align: left;
+    background: transparent;
+    border: none;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+    
+    &:hover {
+      background-color: $color-bg-hover;
+    }
+    
+    &--danger {
+      color: $color-error;
+      
+      &:hover {
+        background-color: $color-error-light;
+      }
+    }
+  }
+}
+
+// Results count
+.results-count {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+// Page size selector
+.page-size-selector {
+  &__select {
+    @include input-base;
+    width: auto;
+    min-width: 60px;
+    padding: $spacing-xs $spacing-md;
+    cursor: pointer;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

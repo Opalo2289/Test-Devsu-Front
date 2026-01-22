@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist/banco-productos/browser"
+
+[[redirects]]
+  from = "/bp/*"
+  to = "https://backtestbanckproyectdevsu.netlify.app/bp/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

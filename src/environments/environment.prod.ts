@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  // TODO: reemplaza por tu URL real del backend en Netlify, por ejemplo:
-  // https://tu-backend.netlify.app
-  apiUrl: 'https://backtestbanckproyectdevsu.netlify.app'
+  // En Netlify, consumimos la API por misma-origen y Netlify hace proxy por redirects.
+  // Esto evita problemas de CORS en producción.
+  apiUrl: ''
 };

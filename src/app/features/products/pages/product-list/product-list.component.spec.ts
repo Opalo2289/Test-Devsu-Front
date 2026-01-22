@@ -129,16 +129,46 @@ describe('ProductListComponent', () => {
 
     it('should show 5 products by default', () => {
       expect(component.pageSize()).toBe(5);
+      expect(component.pageIndex()).toBe(0);
       expect(component.paginatedProducts().length).toBe(3); // Only 3 mock products
+      expect(component.totalPages()).toBe(1);
+      expect(component.currentPage()).toBe(1);
     });
 
     it('should update page size correctly', () => {
       component.pageSize.set(10);
+      component.pageIndex.set(0);
       expect(component.paginatedProducts().length).toBe(3);
+      expect(component.totalPages()).toBe(1);
     });
 
     it('should show total results count', () => {
       expect(component.totalResults()).toBe(3);
+    });
+
+    it('should slice products by pageIndex and pageSize', () => {
+      component.pageSize.set(2);
+      component.pageIndex.set(0);
+      expect(component.paginatedProducts().map(p => p.id)).toEqual(['prod-1', 'prod-2']);
+
+      component.pageIndex.set(1);
+      expect(component.paginatedProducts().map(p => p.id)).toEqual(['prod-3']);
+      expect(component.currentPage()).toBe(2);
+      expect(component.totalPages()).toBe(2);
+    });
+
+    it('should reset to first page when search changes', () => {
+      component.pageSize.set(2);
+      component.pageIndex.set(1);
+
+      const input = document.createElement('input');
+      input.value = 'tarjeta';
+      component.onSearchChange({ target: input } as unknown as Event);
+
+      expect(component.pageIndex()).toBe(0);
+      expect(component.filteredProducts().length).toBe(1);
+      expect(component.totalPages()).toBe(1);
+      expect(component.currentPage()).toBe(1);
     });
   });
 

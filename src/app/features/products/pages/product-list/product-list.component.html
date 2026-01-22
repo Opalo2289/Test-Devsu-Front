@@ -126,6 +126,37 @@
     @if (!isLoading()) {
       <div class="product-list__footer">
         <span class="results-count">{{ totalResults() }} Resultados</span>
+
+        <div class="pager" aria-label="Paginación">
+          <button
+            type="button"
+            class="pager__btn"
+            (click)="prevPage()"
+            [disabled]="currentPage() <= 1"
+            aria-label="Página anterior"
+          >
+            Anterior
+          </button>
+
+          <span class="pager__info" aria-live="polite">
+            @if (totalPages() === 0) {
+              Página 0 de 0
+            } @else {
+              Página {{ currentPage() }} de {{ totalPages() }}
+            }
+          </span>
+
+          <button
+            type="button"
+            class="pager__btn"
+            (click)="nextPage()"
+            [disabled]="totalPages() === 0 || currentPage() >= totalPages()"
+            aria-label="Página siguiente"
+          >
+            Siguiente
+          </button>
+        </div>
+
         <div class="page-size-selector">
           <select 
             class="page-size-selector__select"

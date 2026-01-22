@@ -33,6 +33,7 @@ export class ProductListComponent implements OnInit {
   error = signal<string | null>(null);
   searchTerm = signal('');
   pageSize = signal(5);
+  pageIndex = signal(0);
   openMenuId = signal<string | null>(null);
 
   // Modal de eliminación
@@ -55,11 +56,31 @@ export class ProductListComponent implements OnInit {
 
   // Productos paginados
   paginatedProducts = computed(() => {
-    return this.filteredProducts().slice(0, this.pageSize());
+    const size = this.pageSize();
+    const pages = this.totalPages();
+    const safeIndex = pages === 0 ? 0 : Math.min(this.pageIndex(), pages - 1);
+
+    const start = safeIndex * size;
+    const end = start + size;
+    return this.filteredProducts().slice(start, end);
   });
 
   // Total de resultados
   totalResults = computed(() => this.filteredProducts().length);
+
+  // Total de páginas (0 si no hay resultados)
+  totalPages = computed(() => {
+    const total = this.totalResults();
+    const size = this.pageSize();
+    return total === 0 ? 0 : Math.ceil(total / size);
+  });
+
+  // Página actual (1-based, 0 si no hay resultados)
+  currentPage = computed(() => {
+    const pages = this.totalPages();
+    if (pages === 0) return 0;
+    return Math.min(this.pageIndex(), pages - 1) + 1;
+  });
 
   ngOnInit(): void {
     this.loadProducts();
@@ -72,6 +93,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (products) => {
         this.products.set(products);
+        this.pageIndex.set(0);
         this.isLoading.set(false);
       },
       error: (err) => {
@@ -84,11 +106,26 @@ export class ProductListComponent implements OnInit {
   onSearchChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchTerm.set(target.value);
+    this.pageIndex.set(0);
   }
 
   onPageSizeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.pageSize.set(Number(target.value));
+    this.pageIndex.set(0);
+  }
+
+  prevPage(): void {
+    if (this.pageIndex() <= 0) return;
+    this.pageIndex.update(i => Math.max(0, i - 1));
+  }
+
+  nextPage(): void {
+    const pages = this.totalPages();
+    if (pages === 0) return;
+    const maxIndex = pages - 1;
+    if (this.pageIndex() >= maxIndex) return;
+    this.pageIndex.update(i => Math.min(maxIndex, i + 1));
   }
 
   toggleMenu(productId: string): void {
@@ -130,6 +167,14 @@ export class ProductListComponent implements OnInit {
         this.products.update(products => 
           products.filter(p => p.id !== product.id)
         );
+        // Si al eliminar quedamos fuera del rango de páginas, ajusta.
+        const pages = this.totalPages();
+        if (pages === 0) {
+          this.pageIndex.set(0);
+        } else {
+          const maxIndex = pages - 1;
+          if (this.pageIndex() > maxIndex) this.pageIndex.set(maxIndex);
+        }
         this.showDeleteModal.set(false);
         this.productToDelete.set(null);
         this.isDeleting.set(false);

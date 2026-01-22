@@ -9,12 +9,12 @@
   padding: 0 $spacing-xl;
   background-color: $color-bg-card;
   border-bottom: 1px solid $color-border;
-  
+
   // Espacio vacío a la izquierda para balancear
   &__spacer {
     // Ocupa la primera columna (vacía)
   }
-  
+
   &__logo {
     @include flex-center;
     gap: $spacing-sm;
@@ -22,24 +22,24 @@
     color: $color-text-primary;
     transition: opacity $transition-fast;
     justify-self: center; // Centrar en la columna del medio
-    
+
     &:hover {
       opacity: 0.8;
     }
   }
-  
+
   &__icon {
     width: 32px;
     height: 32px;
     color: $color-text-primary;
   }
-  
+
   &__title {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     letter-spacing: 0.5px;
   }
-  
+
   &__actions {
     justify-self: end; // Alinear a la derecha en la tercera columna
   }
@@ -55,17 +55,17 @@
   border-radius: $border-radius-full;
   cursor: pointer;
   transition: background-color $transition-fast, border-color $transition-fast, transform $transition-fast;
-  
+
   &:hover {
     background-color: $color-bg-hover;
     border-color: $color-border-hover;
     transform: scale(1.05);
   }
-  
+
   &:active {
     transform: scale(0.95);
   }
-  
+
   &__icon {
     width: 22px;
     height: 22px;

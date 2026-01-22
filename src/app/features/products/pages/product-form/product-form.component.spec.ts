@@ -153,7 +153,10 @@ describe('ProductFormComponent', () => {
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
         const dateControl = component.productForm.get('date_release');
-        dateControl?.setValue(yesterday.toISOString().split('T')[0]);
+        const year = yesterday.getFullYear();
+        const month = String(yesterday.getMonth() + 1).padStart(2, '0');
+        const day = String(yesterday.getDate()).padStart(2, '0');
+        dateControl?.setValue(`${year}-${month}-${day}`);
         expect(dateControl?.hasError('minDate')).toBe(true);
       });
     });

@@ -46,10 +46,19 @@ export class ProductListComponent implements OnInit {
     
     if (!term) return products;
     
-    return products.filter(product =>
-      product.name.toLowerCase().includes(term) ||
-      product.description.toLowerCase().includes(term)
-    );
+    return products.filter(product => {
+      const name = (product.name ?? '').toLowerCase();
+      const description = (product.description ?? '').toLowerCase();
+      const releaseDate = this.formatDate(product.date_release).toLowerCase();
+      const revisionDate = this.formatDate(product.date_revision).toLowerCase();
+
+      return (
+        name.includes(term) ||
+        description.includes(term) ||
+        releaseDate.includes(term) ||
+        revisionDate.includes(term)
+      );
+    });
   });
 
   // Productos paginados
@@ -186,12 +195,17 @@ export class ProductListComponent implements OnInit {
   }
 
   formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+    if (!dateString) return '';
+    // Evita issues de timezone al parsear "YYYY-MM-DD"
+    const [yearStr, monthStr, dayStr] = dateString.split('-');
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+    const day = Number(dayStr);
+    if (!year || !month || !day) return '';
+
+    const dd = String(day).padStart(2, '0');
+    const mm = String(month).padStart(2, '0');
+    return `${dd}/${mm}/${year}`;
   }
 
   onImageError(event: Event): void {

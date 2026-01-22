@@ -108,6 +108,13 @@ describe('ProductListComponent', () => {
       expect(component.filteredProducts()[0].id).toBe('prod-2');
     });
 
+    it('should filter products by date (dd/MM/yyyy)', () => {
+      component.searchTerm.set('01/01/2026');
+      
+      expect(component.filteredProducts().length).toBe(1);
+      expect(component.filteredProducts()[0].id).toBe('prod-1');
+    });
+
     it('should return all products when search is empty', () => {
       component.searchTerm.set('');
       
@@ -256,18 +263,13 @@ describe('ProductListComponent', () => {
     }));
 
     it('should format date correctly', () => {
-      // The formatDate uses toLocaleDateString which respects local timezone
-      // Just verify it returns a string with date components
       const formatted = component.formatDate('2025-01-15');
-      expect(typeof formatted).toBe('string');
-      expect(formatted.length).toBeGreaterThan(0);
-      // Verify it contains year
-      expect(formatted).toContain('2025');
+      expect(formatted).toBe('15/01/2025');
     });
 
     it('should return a valid date string format', () => {
       const formatted = component.formatDate('2025-06-20');
-      expect(formatted).toMatch(/\d{2}\/\d{2}\/\d{4}/);
+      expect(formatted).toBe('20/06/2025');
     });
   });
 

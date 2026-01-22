@@ -1,0 +1,104 @@
+// ==============================================
+// THEMES - Sistema de temas claro/oscuro
+// ==============================================
+
+// Tema claro (predeterminado)
+:root {
+  // Colores primarios
+  --color-primary: #FFDC00;
+  --color-primary-hover: #E6C600;
+  --color-primary-dark: #C9A800;
+
+  // Colores de texto
+  --color-text-primary: #1A1A2E;
+  --color-text-secondary: #4A4A5A;
+  --color-text-muted: #8A8A9A;
+  --color-text-light: #FFFFFF;
+
+  // Colores de fondo
+  --color-bg-main: #F5F5F5;
+  --color-bg-card: #FFFFFF;
+  --color-bg-hover: #F0F0F0;
+
+  // Colores de estado
+  --color-error: #D32F2F;
+  --color-error-light: #FFEBEE;
+  --color-success: #2E7D32;
+  --color-success-light: #E8F5E9;
+  --color-warning: #F57C00;
+  --color-info: #1976D2;
+
+  // Bordes
+  --color-border: #E0E0E0;
+  --color-border-hover: #BDBDBD;
+  --color-border-focus: #1A1A2E;
+  --color-border-error: #D32F2F;
+
+  // Sombras
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  // Skeleton loader
+  --skeleton-base: #F5F5F5;
+  --skeleton-highlight: #EBEBEB;
+}
+
+// Tema oscuro
+[data-theme="dark"] {
+  // Colores primarios (se mantienen para identidad de marca)
+  --color-primary: #FFDC00;
+  --color-primary-hover: #FFE333;
+  --color-primary-dark: #E6C600;
+
+  // Colores de texto (invertidos)
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #B0B0B0;
+  --color-text-muted: #808080;
+  --color-text-light: #1A1A2E;
+
+  // Colores de fondo (oscuros)
+  --color-bg-main: #1A1A2E;
+  --color-bg-card: #2D2D44;
+  --color-bg-hover: #3A3A52;
+
+  // Colores de estado (ajustados para modo oscuro)
+  --color-error: #EF5350;
+  --color-error-light: #3D2323;
+  --color-success: #66BB6A;
+  --color-success-light: #233D23;
+  --color-warning: #FFA726;
+  --color-info: #42A5F5;
+
+  // Bordes (más claros para visibilidad)
+  --color-border: #3A3A52;
+  --color-border-hover: #4A4A62;
+  --color-border-focus: #FFDC00;
+  --color-border-error: #EF5350;
+
+  // Sombras (más pronunciadas en modo oscuro)
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+  // Skeleton loader
+  --skeleton-base: #2D2D44;
+  --skeleton-highlight: #3A3A52;
+}
+
+// Transición suave al cambiar temas
+html {
+  color-scheme: light dark;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease,
+              color 0.15s ease;
+}

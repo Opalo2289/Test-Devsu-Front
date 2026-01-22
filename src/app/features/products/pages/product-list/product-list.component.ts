@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { ProductService } from '@core/services/product.service';
+import { ExportService, ExportColumn } from '@core/services/export.service';
 import { ConfirmModalComponent } from '@shared/components/confirm-modal/confirm-modal.component';
 import { SkeletonLoaderComponent } from '@shared/components/skeleton-loader/skeleton-loader.component';
 import { Product } from '../../models/product.model';
@@ -23,6 +24,7 @@ import { Product } from '../../models/product.model';
 })
 export class ProductListComponent implements OnInit {
   private readonly productService = inject(ProductService);
+  private readonly exportService = inject(ExportService);
   private readonly router = inject(Router);
 
   // Estado
@@ -158,5 +160,31 @@ export class ProductListComponent implements OnInit {
 
   trackByProductId(index: number, product: Product): string {
     return product.id;
+  }
+
+  // Configuración de columnas para exportación
+  private readonly exportColumns: ExportColumn[] = [
+    { header: 'ID', key: 'id', width: 15 },
+    { header: 'Nombre', key: 'name', width: 25 },
+    { header: 'Descripción', key: 'description', width: 40 },
+    { header: 'Logo', key: 'logo', width: 30 },
+    { header: 'Fecha Liberación', key: 'date_release', width: 15 },
+    { header: 'Fecha Revisión', key: 'date_revision', width: 15 }
+  ];
+
+  exportToExcel(): void {
+    const data = this.filteredProducts();
+    if (data.length === 0) return;
+    
+    const filename = this.exportService.generateFilename('productos');
+    this.exportService.exportToExcel(data, filename, this.exportColumns);
+  }
+
+  exportToCsv(): void {
+    const data = this.filteredProducts();
+    if (data.length === 0) return;
+    
+    const filename = this.exportService.generateFilename('productos');
+    this.exportService.exportToCsv(data, filename, this.exportColumns);
   }
 }

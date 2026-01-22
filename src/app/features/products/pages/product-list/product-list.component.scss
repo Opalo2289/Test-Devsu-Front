@@ -43,6 +43,62 @@
   }
 }
 
+// Toolbar actions
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+// Export buttons
+.export-buttons {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.btn-export {
+  @include button-secondary;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  &--excel {
+    color: #1D6F42;
+    border-color: #1D6F42;
+    
+    &:hover:not(:disabled) {
+      background-color: #E8F5E9;
+    }
+  }
+  
+  &--csv {
+    color: #1976D2;
+    border-color: #1976D2;
+    
+    &:hover:not(:disabled) {
+      background-color: #E3F2FD;
+    }
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
 // Add button
 .btn-add {
   @include button-primary;

@@ -2,7 +2,6 @@
 // MIXINS - Utilidades reutilizables
 // ==============================================
 
-@use 'sass:color';
 @use 'variables' as *;
 
 // Flexbox
@@ -127,7 +126,7 @@
   &:focus {
     outline: none;
     border-color: $color-border-focus;
-    box-shadow: 0 0 0 2px rgba($color-text-primary, 0.1);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   }
   
   &:disabled {
@@ -141,7 +140,7 @@
   
   &:focus {
     border-color: $color-border-error;
-    box-shadow: 0 0 0 2px rgba($color-error, 0.1);
+    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.1);
   }
 }
 
@@ -172,12 +171,11 @@
 
 // Skeleton loader animation
 @mixin skeleton-animation {
-  $skeleton-dark: color.adjust($color-bg-main, $lightness: -5%);
   background: linear-gradient(
     90deg,
-    $color-bg-main 25%,
-    $skeleton-dark 50%,
-    $color-bg-main 75%
+    var(--skeleton-base) 25%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-base) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;

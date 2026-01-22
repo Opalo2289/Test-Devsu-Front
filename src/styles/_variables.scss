@@ -2,41 +2,41 @@
 // VARIABLES - Design System Banco
 // ==============================================
 
-// Colores primarios
-$color-primary: #FFDC00;
-$color-primary-hover: #E6C600;
-$color-primary-dark: #C9A800;
+// Colores primarios (usando CSS custom properties para theming)
+$color-primary: var(--color-primary);
+$color-primary-hover: var(--color-primary-hover);
+$color-primary-dark: var(--color-primary-dark);
 
 // Colores de texto
-$color-text-primary: #1A1A2E;
-$color-text-secondary: #4A4A5A;
-$color-text-muted: #8A8A9A;
-$color-text-light: #FFFFFF;
+$color-text-primary: var(--color-text-primary);
+$color-text-secondary: var(--color-text-secondary);
+$color-text-muted: var(--color-text-muted);
+$color-text-light: var(--color-text-light);
 
 // Colores de fondo
-$color-bg-main: #F5F5F5;
-$color-bg-card: #FFFFFF;
-$color-bg-hover: #F0F0F0;
+$color-bg-main: var(--color-bg-main);
+$color-bg-card: var(--color-bg-card);
+$color-bg-hover: var(--color-bg-hover);
 
 // Colores de estado
-$color-error: #D32F2F;
-$color-error-light: #FFEBEE;
-$color-success: #2E7D32;
-$color-success-light: #E8F5E9;
-$color-warning: #F57C00;
-$color-info: #1976D2;
+$color-error: var(--color-error);
+$color-error-light: var(--color-error-light);
+$color-success: var(--color-success);
+$color-success-light: var(--color-success-light);
+$color-warning: var(--color-warning);
+$color-info: var(--color-info);
 
 // Bordes
-$color-border: #E0E0E0;
-$color-border-hover: #BDBDBD;
-$color-border-focus: #1A1A2E;
-$color-border-error: #D32F2F;
+$color-border: var(--color-border);
+$color-border-hover: var(--color-border-hover);
+$color-border-focus: var(--color-border-focus);
+$color-border-error: var(--color-border-error);
 
 // Sombras
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-$shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-sm: var(--shadow-sm);
+$shadow-md: var(--shadow-md);
+$shadow-lg: var(--shadow-lg);
+$shadow-card: var(--shadow-card);
 
 // Tipografía
 $font-family-base: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;

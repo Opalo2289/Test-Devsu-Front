@@ -2,6 +2,9 @@
 // ESTILOS GLOBALES - Banco Productos Financieros
 // ==============================================
 
+// Temas (debe ir primero para definir CSS custom properties)
+@use 'styles/themes';
+
 @use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 @use 'styles/base';

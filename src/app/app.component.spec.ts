@@ -1,17 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { signal } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from '@shared/components/header/header.component';
+import { ThemeService } from '@core/services/theme.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
+  const themeServiceMock = {
+    isDarkMode: signal(false).asReadonly(),
+    toggleTheme: jest.fn()
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterTestingModule, HeaderComponent]
+      imports: [AppComponent],
+      providers: [
+        provideRouter([]),
+        { provide: ThemeService, useValue: themeServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

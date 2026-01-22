@@ -25,7 +25,7 @@ Aplicación web para la gestión de productos financieros de una institución ba
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
+git clone https://github.com/Opalo2289/Test-Devsu-Front.git
 cd Test-Devsu-Front
 
 # Instalar dependencias
